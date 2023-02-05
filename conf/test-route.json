@@ -1,0 +1,115 @@
+{
+  "id": "430024799805244101",
+  "update_time": 1666342839,
+  "uris": [
+    "/anything/*",
+    "/anything2/*",
+    "/discovery/service/callee/sum?value1=1&value2=2"
+  ],
+  "name": "test-http",
+  "desc": "描述信息",
+  "priority": 10,
+  "host": "127.0.0.1",
+  "remote_addrs": [
+    "127.0.0.1",
+    "192.168.1.101"
+  ],
+  "plugins": {
+    "ip-restriction": {
+      "disable": false,
+      "whitelist": [
+        "127.0.0.1"
+      ]
+    },
+    "cgw-interface-part": {
+      "disable": true,
+      "interfaces": [
+        {
+          "interface_name": "CreateHashDeposit",
+          "dest_uri": "/v1/deposit/CreateHashDeposit",
+          "method": "POST"
+        },
+        {
+          "interface_name": "CreateDataDeposit",
+          "dest_uri": "/v1/deposit/CreateDataDeposit",
+          "method": "POST"
+        },
+        {
+          "interface_name": "GetDepositCert",
+          "dest_uri": "/v1/deposit/GetDepositCert",
+          "method": "POST"
+        }
+      ]
+    },
+    "real-ip": {
+      "disable": true,
+      "source": "arg_realip",
+      "trusted_addresses": [
+        "127.0.0.0/24"
+      ]
+    },
+    "proxy-rewrite": {
+      "disable": true,
+      "headers": {
+        "X-Api-Version": "v1",
+        "X-Api-Engine": "apisix",
+        "X-Api-useless": ""
+      },
+      "method": "POST",
+      "regex_uri": [
+        "^/test/(.*)",
+        "/$1"
+      ],
+      "scheme": "http"
+    },
+    "response-rewrite": {
+      "disable": true,
+      "headers": {
+        "remote_addr": "$remote_addr",
+        "remote_port": "$remote_port"
+      }
+    },
+    "oauth2": {
+      "disable": true,
+      "client_id": "b86eefc69d754a30a8528066bf95dcac",
+      "client_secret": "p5I2Jf3cxICNQd6jKxzXYJNcXYzEZZd7CyeqQ7Gy",
+      "discovery": "http://127.0.0.1:8094",
+      "real": "write read",
+      "bearer_only": true,
+      "introspection_endpoint": "http://127.0.0.1:8094/remote/token/token/",
+      "introspection_endpoint_auth_method": "client_secret_basic",
+      "timeout": 5
+    },
+    "request-id": {
+      "disable": true
+    }
+  },
+  "upstream": {
+    "nodes": {
+      "httpbin.org:80": 10
+    },
+    "timeout": {
+      "connect": 6,
+      "send": 6,
+      "read": 6
+    },
+    "type": "roundrobin",
+    "scheme": "http",
+    "discovery_type": "polaris",
+    "discovery_args": {
+      "server_addr": "127.0.0.1:8091",
+      "namespace": "apisix-dev",
+      "service": "apisix-dev"
+    },
+    "pass_host": "pass",
+    "keepalive_pool": {
+      "idle_timeout": 60,
+      "requests": 1000,
+      "size": 320
+    }
+  },
+  "labels": {
+    "API_VERSION": "v1.0"
+  },
+  "status": 1
+}

@@ -1,0 +1,11 @@
+go-runner
+!go-runner/
+release/
+*.tgz
+.idea
+.DS_Store
+coverage.txt
+**/logs/**
+/logs
+*.svg
+/polaris

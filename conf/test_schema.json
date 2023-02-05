@@ -1,0 +1,67 @@
+{
+  "$comment": "this is a mark for our injected plugin schema",
+  "required": [
+    "client_id",
+    "client_secret",
+    "discovery"
+  ],
+  "properties": {
+    "disable": {
+      "type": "boolean"
+    },
+    "client_id": {
+      "maxLength": 1024,
+      "minLength": 6,
+      "type": "string"
+    },
+    "client_secret": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "type": "string"
+    },
+    "discovery": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "type": "string"
+    },
+    "real": {
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string"
+    },
+    "bearer_only": {
+      "type": "boolean"
+    },
+    "logout_path": {
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "redirect_uri": {
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "timeout": {
+      "type": "integer"
+    },
+    "ssl_verify": {
+      "type": "boolean"
+    },
+    "introspection_endpoint": {
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "introspection_endpoint_auth_method": {
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "public_key": {
+      "maxLength": 10000,
+      "type": "string"
+    },
+    "token_signing_alg_values_expected": {
+      "maxLength": 10000,
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

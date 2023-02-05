@@ -1,0 +1,45 @@
+{
+  "id": "430024799805244101",
+  "update_time": 1665977614,
+  "uri": "/websockify",
+  "name": "test-ws",
+  "methods": [
+    "GET"
+  ],
+  "plugins": {
+    "ip-restriction": {
+      "whitelist": [
+        "127.0.0.1"
+      ]
+    }
+  },
+  "upstream": {
+    "nodes": [
+      {
+        "host": "9.135.34.114",
+        "port": 8888,
+        "weight": 1
+      },
+      {
+        "host": "127.0.0.1",
+        "port": 8899,
+        "weight": 1
+      }
+    ],
+    "timeout": {
+      "connect": 6,
+      "send": 6,
+      "read": 6
+    },
+    "type": "roundrobin",
+    "scheme": "http",
+    "pass_host": "pass",
+    "keepalive_pool": {
+      "idle_timeout": 60,
+      "requests": 1000,
+      "size": 320
+    }
+  },
+  "enable_websocket": true,
+  "status": 1
+}
